@@ -75,6 +75,16 @@ sudo pip3 install -e .
 ```
 Please note that this will not create menu shortcut and you may need to run gui twice as it may want to adjust policy. 
 
+
+**Allow python to access /dev/sdx**
+
+Since SELinux might detect the access filesystem from python3 script, we need to allow this access by create a local policy:
+
+```
+sudo ausearch -c 'python3' --raw | audit2allow -M my-python3
+sudo semodule -X 300 -i my-python3.pp
+```
+
 ### Uninstalling
 
 To remove WoeUSB-ng completely run (needed only when using installation from source code):
